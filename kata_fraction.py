@@ -1,17 +1,20 @@
-def sum_fraction(fract_A, fract_B):
-  return Fraction((fract_A.numerateur * fract_B.denominateur + fract_B.numerateur * fract_A.denominateur),
-                  fract_A.denominateur * fract_B.denominateur)
+import math
 
-def gcd(a,b):
-    return a if b==0 else gcd(b,a%b)
 
-def reduced_fraction(a,b):
-    val_gcd = gcd(sum_fraction(a,b).numerateur,sum_fraction(a,b).denominateur)
-    return Fraction(sum_fraction(a,b).numerateur/val_gcd,sum_fraction(a,b).denominateur/val_gcd)
+def sum(a, b):
+    numerateur = a.numerateur * b.denominateur + b.numerateur * a.denominateur
+    denominateur = a.denominateur * b.denominateur
+    gcd = math.gcd(numerateur, denominateur)
+    return Fraction(numerateur // gcd, denominateur // gcd)
+
 
 class Fraction:
-  def __init__(self, numerateur, denominateur):
-    self.numerateur = numerateur
-    self.denominateur = denominateur
+    def __init__(self, numerateur, denominateur):
+        self.numerateur = numerateur
+        self.denominateur = denominateur
 
-
+    def __eq__(self, other):
+        return (
+            self.numerateur == other.numerateur
+            and self.denominateur == other.denominateur
+        )
